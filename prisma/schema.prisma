@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(uuid())
+  fullName      String
+  email         String          @unique
+  phone         String          @unique
+  password      String
+  role          Role
+  reviews       Review[]
+  reservations  Reservation[]
+}
+
+model Service {
+  id             String          @id @default(uuid())
+  serviceName    String
+  duration       Int             // Duration in minutes
+  branchId       String
+  branch         Branch          @relation(fields: [branchId], references: [id])
+  reservations   Reservation[]
+}
+
+model Review {
+  id             String          @id @default(uuid())
+  starRating     Int
+  comment        String
+  userId         String
+  user           User            @relation(fields: [userId], references: [id])
+}
+
+model Reservation {
+  id              String          @id @default(uuid())
+  reservationName String
+  activePhone     String
+  userId          String
+  serviceId       String
+  stylistId       String
+  reservationTime DateTime        
+  user            User            @relation(fields: [userId], references: [id])
+  service         Service         @relation(fields: [serviceId], references: [id])
+  stylist         Stylist         @relation(fields: [stylistId], references: [id])
+}
+
+model Branch {
+  id             String          @id @default(uuid())
+  name           String
+  location       String
+  openingTime    DateTime
+  closingTime    DateTime
+  services       Service[]
+  stylists       Stylist[]
+}
+
+model Stylist {
+  id             String          @id @default(uuid())
+  name           String
+  gender         String
+  imgUrl         String
+  branchId       String
+  branch         Branch          @relation(fields: [branchId], references: [id])
+  reservations   Reservation[]
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
