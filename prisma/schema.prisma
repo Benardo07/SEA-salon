@@ -8,69 +8,78 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  fullName      String
-  email         String          @unique
-  phone         String          @unique
-  password      String
-  role          Role
-  reviews       Review[]
-  reservations  Reservation[]
+  id           String        @id @default(uuid())
+  fullName     String
+  email        String        @unique
+  phone        String        @unique
+  password     String
+  role         Role          @default(CUSTOMER)
+  reviews      Review[]
+  reservations Reservation[]
 }
 
 model Service {
-  id             String          @id @default(uuid())
-  serviceName    String
-  duration       Int             
-  branchId       String
-  description    String
-  imgUrl         String          
-  branch         Branch          @relation(fields: [branchId], references: [id])
-  reservations   Reservation[]
+  id           String        @id @default(uuid())
+  serviceName  String
+  duration     Int
+  branchId     String
+  description  String
+  typeId       String
+  imgUrl       String
+  serviceType  ServiceType   @relation(fields: [typeId], references: [id])
+  branch       Branch        @relation(fields: [branchId], references: [id])
+  reservations Reservation[]
 }
 
 model Review {
-  id             String          @id @default(uuid())
-  starRating     Int
-  comment        String
-  userId         String
-  user           User            @relation(fields: [userId], references: [id])
+  id         String   @id @default(uuid())
+  starRating Int
+  comment    String
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
 }
 
 model Reservation {
-  id              String          @id @default(uuid())
+  id              String   @id @default(uuid())
   reservationName String
   activePhone     String
   userId          String
   serviceId       String
   stylistId       String
   reservationTime DateTime
-  createdAt       DateTime        @default(now()) 
-  user            User            @relation(fields: [userId], references: [id])
-  service         Service         @relation(fields: [serviceId], references: [id])
-  stylist         Stylist         @relation(fields: [stylistId], references: [id])
+  createdAt       DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id])
+  service         Service  @relation(fields: [serviceId], references: [id])
+  stylist         Stylist  @relation(fields: [stylistId], references: [id])
 }
 
 model Branch {
-  id             String          @id @default(uuid())
-  name           String
-  location       String
-  openingTime    DateTime
-  closingTime    DateTime
-  branchTelp     String
-  address        String
-  services       Service[]
-  stylists       Stylist[]
+  id          String    @id @default(uuid())
+  name        String
+  locationURL String?
+  openingTime DateTime
+  closingTime DateTime
+  branchTelp  String
+  address     String
+  services    Service[]
+  stylists    Stylist[]
 }
 
 model Stylist {
-  id             String          @id @default(uuid())
-  name           String
-  gender         String
-  imgUrl         String          
-  branchId       String
-  branch         Branch          @relation(fields: [branchId], references: [id])
-  reservations   Reservation[]
+  id           String        @id @default(uuid())
+  name         String
+  gender       String
+  imgUrl       String
+  branchId     String
+  branch       Branch        @relation(fields: [branchId], references: [id])
+  reservations Reservation[]
+}
+
+model ServiceType {
+  id       String    @id @default(uuid())
+  type     String    @unique
+  services Service[]
 }
 
 enum Role {

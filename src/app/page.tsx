@@ -1,9 +1,11 @@
+import LandingPage from "@/components/landingpage";
 import Image from "next/image";
+import Homepage from "./homepage/page";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-3xl font-urbanistBold">Hello All TEs FOnt</h1>
+    <div className="flex w-full items-center justify-center bg-[#f0f5fa]">
+      <Homepage/>
     </div>
   );
 }
