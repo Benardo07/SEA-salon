@@ -12,20 +12,20 @@ const paths = [
     url: "/services"
   },
   {
-    name: "About Us",
-    url: "/about" // Corrected URL, assuming you meant to direct to a different page than Home
-  },
-  {
     name: "Reviews",
     url: "/reviewPage" // Updated to avoid repeated URLs for different navigation items
   },
   {
     name: "Contact",
-    url: "/contact" // Updated to reflect correct navigation logic
+    url: "/#contact" // Updated to reflect correct navigation logic
+  },
+  {
+    name : "Branch",
+    url: "/branches"
   },
   {
     name: "My Reservation",
-    url: "/reservations" // Assuming you want a separate page for reservations
+    url: "/myReservation" // Assuming you want a separate page for reservations
   },
 ];
 

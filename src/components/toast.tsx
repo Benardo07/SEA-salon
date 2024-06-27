@@ -22,7 +22,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, isOpen, closeToast }) => {
   const bgColor = {
     info: 'bg-blue',
     success: 'bg-[#6AD77E]',
-    error: 'bg-red',
+    error: 'bg-red-600',
   }[type];
 
   return (

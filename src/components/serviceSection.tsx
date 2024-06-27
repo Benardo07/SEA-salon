@@ -1,9 +1,15 @@
 import React from 'react';
 import ServiceItem from './serviceItem';
 
+interface ServiceObject {
+  serviceName: string;
+  imgUrl: string;
+}
+
+
 interface ServicesSectionProps {
   title: string;
-  services: Array<{ title: string; time?: string; price?: string; imageUrl: string }>;
+  services: ServiceObject[];
 }
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({ title, services }) => {
@@ -14,10 +20,8 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ title, services }) =>
         {services.map((service, index) => (
           <ServiceItem
             key={index}
-            title={service.title}
-            time={service.time}
-            price={service.price}
-            imageUrl={service.imageUrl}
+            title={service.serviceName}
+            imageUrl={service.imgUrl}
           />
         ))}
       </div>

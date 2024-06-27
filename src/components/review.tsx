@@ -4,7 +4,7 @@ import RatingRadio from './ratingRadio';
 import ReviewBar from './reviewBar';
 import Star from './star';
 import { useRouter } from 'next/navigation';
-import Loading from './loading';
+import Loading from '../app/loading';
 import Toast from './toast';
 import { ToastState } from './loginForm';
 
@@ -48,7 +48,10 @@ const ReviewPage: React.FC = () => {
       if (response.ok) {
         console.log('Review submitted:', data);
         setToast({ isOpen: true, message: "Write Success", type: "success" });
+      
         router.push('/reviewPage');
+        router.refresh()
+
         
       } else {
         setToast({ isOpen: true, message: "Write Failed", type: "error" });

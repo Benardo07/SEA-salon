@@ -1,6 +1,19 @@
 import ServicesSection from "@/components/serviceSection";
+import { db } from "@/lib/db";
+import { Service } from "../reservation/page";
+import fetchServices from "../actions/fetchServices";
 
-const HomePage: React.FC = () => {
+interface ServiceData {
+  title: string;
+  imgUrl: string;
+}
+
+export default async function Services() {
+
+  const serviceData = await fetchServices();
+
+  console.log(serviceData);
+
   const haircuts = [
     {
       title: "Men's Haircut",
@@ -86,9 +99,10 @@ const HomePage: React.FC = () => {
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col w-3/4 max-w-[1260px] flex-1">
             <h1 className="text-[#0b141e] tracking-light text-[32px] font-bold leading-tight px-4 text-left pb-3 pt-6">Our Services</h1>
-            <ServicesSection title="Haircuts & Styling" services={haircuts} />
-            <ServicesSection title="Manicure & Pedicure" services={manicurePedicure} />
-            <ServicesSection title="Facial Treatments" services={facialTreatments} />
+            {serviceData.map((serviceType) => (
+              <ServicesSection title={serviceType.type} services={serviceType.services} />
+            ))}
+            
           </div>
         </div>
       </div>
@@ -96,4 +110,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+

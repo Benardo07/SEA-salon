@@ -26,6 +26,7 @@ model Service {
   description  String
   typeId       String
   imgUrl       String
+  price        String
   serviceType  ServiceType   @relation(fields: [typeId], references: [id])
   branch       Branch        @relation(fields: [branchId], references: [id])
   reservations Reservation[]
@@ -47,8 +48,10 @@ model Reservation {
   userId          String
   serviceId       String
   stylistId       String
+  branchId        String
   reservationTime DateTime
   createdAt       DateTime @default(now())
+  branch          Branch @relation(fields: [branchId], references: [id])
   user            User     @relation(fields: [userId], references: [id])
   service         Service  @relation(fields: [serviceId], references: [id])
   stylist         Stylist  @relation(fields: [stylistId], references: [id])
@@ -58,12 +61,13 @@ model Branch {
   id          String    @id @default(uuid())
   name        String
   locationURL String?
-  openingTime DateTime
-  closingTime DateTime
+  openingTime String
+  closingTime String
   branchTelp  String
   address     String
   services    Service[]
   stylists    Stylist[]
+  reservations Reservation[]
 }
 
 model Stylist {
@@ -79,6 +83,7 @@ model Stylist {
 model ServiceType {
   id       String    @id @default(uuid())
   type     String    @unique
+  imgUrl   String?
   services Service[]
 }
 

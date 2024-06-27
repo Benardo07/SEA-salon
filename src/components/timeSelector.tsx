@@ -26,6 +26,7 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({ selectedTime, selectedDate,
           <div className="grid grid-cols-4 gap-2">
             {morningTimes.map((time, index) => (
               <button
+               type="button"
                 key={index}
                 className={`py-2 px-4 rounded-md border ${selectedTime === time ? 'bg-[#2094f3] text-white' : 'border-[#dbe1e6] text-[#111518]'} ${checkTimePassed(time) ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={() => !checkTimePassed(time) && onTimeClick(time)}
@@ -41,6 +42,7 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({ selectedTime, selectedDate,
           <div className="grid grid-cols-4 gap-2">
             {afternoonTimes.map((time, index) => (
               <button
+                type="button"
                 key={index}
                 className={`py-2 px-4 rounded-md border ${selectedTime === time ? 'bg-[#2094f3] text-white' : 'border-[#dbe1e6] text-[#111518]'} ${checkTimePassed(time) ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={() => !checkTimePassed(time) && onTimeClick(time)}
@@ -56,6 +58,7 @@ const TimeSelector: React.FC<TimeSelectorProps> = ({ selectedTime, selectedDate,
           <div className="grid grid-cols-4 gap-2">
             {eveningTimes.map((time, index) => (
               <button
+                type="button"
                 key={index}
                 className={`py-2 px-4 rounded-md border ${selectedTime === time ? 'bg-[#2094f3] text-white' : 'border-[#dbe1e6] text-[#111518]'} ${checkTimePassed(time) ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={() => !checkTimePassed(time) && onTimeClick(time)}

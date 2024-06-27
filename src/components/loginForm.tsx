@@ -55,8 +55,9 @@ const LoginForm: React.FC = () => {
     // Check the response from signIn
     if (result?.ok) {
       setToast({ isOpen: true, message: "Login successful", type: "success" });
-      router.refresh();
+      
       router.push("/");
+      router.refresh();
       // Redirect or perform further actions after successful login
     } else {
       setToast({ isOpen: true, message: result?.error || "Login failed", type: "error" });

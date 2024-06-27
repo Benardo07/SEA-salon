@@ -4,8 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Toast from './toast'; // Assuming you are using a toast component
 import { ToastState } from './loginForm';
 import Link from 'next/link';
-import LoadingSpinner from './loading';
-import Loading from './loading';
+import LoadingSpinner from '../app/loading';
+import Loading from '../app/loading';
 import { useRouter } from 'next/navigation';
 
 
