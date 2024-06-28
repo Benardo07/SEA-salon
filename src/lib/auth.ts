@@ -10,6 +10,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
   pages: {
     signIn: "/login",
@@ -54,6 +55,7 @@ export const authOptions: NextAuthOptions = {
           id: existingUser.id.toString(),
           fullName: existingUser.fullName,
           email: existingUser.email,
+          role: existingUser.role,
         };
 
         return user;
@@ -66,6 +68,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.fullName = user.fullName;
         token.email = user.email;
+        token.role = user.role;
       }
       return token;
     },
@@ -76,6 +79,7 @@ export const authOptions: NextAuthOptions = {
           session.user.id = user.id;
           session.user.fullName = user.fullName;
           session.user.email = user.email;
+          session.user.role = user.role;
         }
       }
       return session;

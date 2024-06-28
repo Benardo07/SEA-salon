@@ -46,3 +46,72 @@ export async function POST(req : Request) {
           );
     }
 }
+
+export async function DELETE(req : Request) {
+    try {
+        const session = await getServerSession(authOptions);
+        if(!session || !session?.user.email || session.user.role != "ADMIN"){
+            return NextResponse.json(
+                {
+                  message: 'Unauthorized',
+                },
+                { status: 404 }
+              );
+        }
+
+        
+
+        const body = await req.json();
+        const { reservationId } = body;
+        
+        const deleteResult = await db.reservation.delete({
+            where: { id: reservationId as string },
+        });
+
+        const fetchedReservations = await db.reservation.findMany({
+            select: {
+                id:true,
+                reservationName: true,
+                activePhone: true,
+                user : {
+                    select: {
+                        email: true,
+                    }
+                },
+                service: {
+                    select: {
+                        serviceName: true,
+                    }
+                },
+                branch: {
+                    select: {
+                        name: true,
+                    }
+                },
+                reservationTime: true,
+                stylist: {
+                    select: {
+                        name: true,
+                    }
+                }
+    
+            }
+          })
+
+          return NextResponse.json(
+            {
+              message: "Delete Reservation Succesfully",
+              newReservations: fetchedReservations,
+            },
+            { status: 201 }
+          );
+
+    }catch (error){
+        return NextResponse.json(
+            {
+              message: "Internal Server Error"
+            },
+            { status: 500 }
+          );  
+    }
+}

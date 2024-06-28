@@ -21,7 +21,7 @@ export default function StylistSwiper({stylists , onSelectStylist} : SwiperProps
     return (
         <Swiper
               effect={'coverflow'}
-              spaceBetween={30}
+              spaceBetween={50}
               grabCursor={true}
               centeredSlides={true}
               slidesPerView={'auto'}
@@ -41,7 +41,7 @@ export default function StylistSwiper({stylists , onSelectStylist} : SwiperProps
                     key={stylist.id} 
                     style={{
                     border: selectedStylistId === stylist.id ? '3px solid #2094F3' : '1px solid #000000',
-                    width: '300px',
+                    width: '250px',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     borderRadius: '20px',  // Adds rounded corners

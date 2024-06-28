@@ -11,6 +11,7 @@ import { ToastState } from './loginForm';
 import Toast from './toast';
 import { useRouter } from 'next/navigation';
 import Loading from '../app/loading';
+import ServicesSection from './serviceSection';
 
 interface ServiceTypes {
   id: string;
@@ -212,9 +213,9 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
   };
 
   return (
-    <div className="layout-content-container flex flex-col w-3/4 py-5 max-w-[1260px] flex-1">
-      <div className="@container">
-        <div className="@container @[480px]:px-4 @[480px]:py-3">
+    <div className="flex flex-col w-3/4 py-5 max-w-[1260px] flex-1">
+      
+        <div className=" @[480px]:px-4 @[480px]:py-3">
           <div
             className="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-xl min-h-[218px] relative"
           >
@@ -226,7 +227,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
             />
           </div>
         </div>
-      </div>
+
 
       <BranchModal
         isOpen={showBranchModal}
@@ -246,9 +247,9 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
           <label className='flex flex-col  min-w-40 '>
             <p className="text-[#111518] text-base font-bold leading-normal pb-2">Branch</p>
           </label>
-          <div className=' flex flex-row items-center gap-10'>
+          <div className=' flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-10'>
               {selectedBranch? (
-                <div className='w-80 flex flex-col justify-center px-4 py-2 border-2 rounded-2xl border-black'>
+                <div className='w-60 md:w-80 flex flex-col justify-center px-4 py-2 border-2 rounded-2xl border-black'>
                     <p className=' font-bold'>{selectedBranch.name}</p>
                     <p>{selectedBranch.address}</p>
                     <p>Open {selectedBranch.openingTime} - Close {selectedBranch.closingTime}</p>
@@ -256,7 +257,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
                 </div>
               ) : (<div className='w-80  h-24 flex flex-col items-center justify-center border-2 rounded-2xl'>None</div>)}
 
-              <button type="button" onClick={() => setShowBranchModal(true)} className="px-5 bg-[#1980e6] hover:bg-opacity-50 font-bold py-3 h-16 rounded-full border-2">
+              <button type="button" onClick={() => setShowBranchModal(true)} className="px-3 w-40 md:w-auto md:px-5 bg-[#1980e6] hover:bg-opacity-50 font-bold py-1 md:py-3 h-10 md:h-16 rounded-full border-2">
                   Select Branch
               </button>
             </div>
@@ -302,10 +303,15 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
         </div>
         
         {serviceType && (
-          <div className='flex flex-col px-4 py-3'>
-            <h3 className="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] my-10">Select Services</h3>
+          <div className='flex flex-col flex-1 px-4 py-3'>
+            <h3 className="text-[#111518] text-lg font-bold leading-tight  tracking-[-0.015em] px-4 mt-10">Select Services</h3>
+            <p className='px-4 mb-10'>Click to select</p>
             {services && services.length > 0 ? (
-              <ServiceSwiper services={services} onSelectService={setSelectedService}/>
+              <div>
+                <ServiceSwiper services={services} onSelectService={setSelectedService}/>
+              </div>
+              
+              
             ) : (
               <div className='w-full flex items-center justify-center h-40 text-black'>No services for this type</div>
             )}
@@ -314,9 +320,12 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
         )}
 
         <div className='flex flex-col px-4 py-3'>
-          <h3 className="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] my-10">Select Stylist</h3> 
+          <h3 className="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 mt-10">Select Stylist</h3> 
+          <p className=' px-4 mb-10'>Click to select</p>
           {stylists ? (
-            <StylistSwiper stylists={stylists} onSelectStylist={setSelectedStylist}/>
+            <div>
+              <StylistSwiper stylists={stylists} onSelectStylist={setSelectedStylist}/>
+            </div>
           ): 
           <div className='w-full flex items-center justify-center h-40 text-black'>No stylist in this branch yet</div>
           }

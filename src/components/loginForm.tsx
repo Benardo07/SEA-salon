@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import Toast from './toast'; // Assuming you are using react-toastify for toasts
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -22,6 +22,7 @@ interface LoginFormInputs {
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const { register, handleSubmit, formState: { errors }, setValue, trigger } = useForm<LoginFormInputs>();
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const [toast, setToast] = useState<ToastState>({
     isOpen: false,
@@ -30,38 +31,53 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    
     console.log(data);
-  
-    // Email validation (simple regex for demonstration; consider a more comprehensive regex for production)
+    
     const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     if (!emailRegex.test(data.email)) {
       setToast({ isOpen: true, message: "Invalid email format", type: "error" });
       return;
     }
   
-    // Password length validation
+
     if (data.password.length < 8) {
       setToast({ isOpen: true, message: "Password must be at least 8 characters long", type: "error" });
       return;
     }
   
-    // Attempt to sign in
-    const result = await signIn('credentials', { 
-      redirect: false, // Set to false to handle redirection manually
-      email: data.email,
-      password: data.password
-    });
+    setLoading(true);
+    try{
+      const result = await signIn('credentials', { 
+        redirect: false,
+        email: data.email,
+        password: data.password
+      });
+    
   
-    // Check the response from signIn
-    if (result?.ok) {
-      setToast({ isOpen: true, message: "Login successful", type: "success" });
-      
-      router.push("/");
-      router.refresh();
-      // Redirect or perform further actions after successful login
-    } else {
-      setToast({ isOpen: true, message: result?.error || "Login failed", type: "error" });
-    }
+      if (result?.ok) {
+        // const { data: session } = useSession();
+        setToast({ isOpen: true, message: "Login successful", type: "success" });
+        const session = await getSession()
+        
+        if(session?.user.role === "ADMIN"){
+          router.push("/adminDashboard");
+        }else{
+          router.push("/");
+        }
+  
+  
+        router.refresh();
+      } else {
+        setToast({ isOpen: true, message: result?.error || "Login failed", type: "error" });
+      }
+    }catch(error){
+      setToast({ isOpen: true, message: "Login failed", type: "error" });
+    }finally{
+      setLoading(false);
+    }    
+
+    
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +92,11 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className="w-3/4 max-w-[500px] flex flex-col items-center justify-center py-40 gap-10">
+      {isLoading && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div className="loader"></div>
+            </div>
+        )}
       <h1 className="text-3xl font-bold">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 items-center justify-center">
         <div className="w-full">

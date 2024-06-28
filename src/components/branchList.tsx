@@ -16,13 +16,15 @@ export default function BranchList({branches} : propsData){
             showPopup(true);
           }
     }
+
+    
     return (
         <div className="flex w-2/3 max-w-[1260px] flex-col items-center justify-center gap-10 py-20">
             {popup && (<PopupMaps locationURL={url} onClose={() => showPopup(false)}/>)}
             <h1 className="text-3xl font-bold text-black">All Branch</h1>
             <div className="flex flex-row gap-10 flex-wrap items-center w-full justify-center">
                 {branches.map((branch) => (
-                    <div key={branch.id} className="flex flex-col justify-center gap-3 rounded-2xl border-2 w-80 p-4">
+                    <div key={branch.id} className="flex flex-col justify-center gap-3 rounded-2xl border-2 w-80 p-4 min-h-[250px]">
                         <p className='font-bold'>{branch.name}</p>
                         <p>{branch.address}</p>
                         <p>Open {branch.openingTime} - Close {branch.closingTime}</p>

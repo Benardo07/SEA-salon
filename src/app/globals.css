@@ -63,3 +63,7 @@ body {
   width: 300px;
   height: 300px;
 }
+
+.scrollable-form::-webkit-scrollbar {
+  display: none;
+}

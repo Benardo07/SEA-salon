@@ -22,7 +22,7 @@ export default function ServiceSwiper({services , onSelectService} : SwiperProps
     return (
         <Swiper
               effect={'coverflow'}
-              spaceBetween={30}
+              spaceBetween={50}
               grabCursor={true}
               centeredSlides={true}
               slidesPerView={'auto'}
@@ -42,7 +42,7 @@ export default function ServiceSwiper({services , onSelectService} : SwiperProps
                 key={service.id} 
                 style={{
                 border: selectedServiceId === service.id ? '3px solid #2094F3' : '1px solid #000000',
-                width: '300px',
+                width: '250px',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 borderRadius: '20px',  // Adds rounded corners
