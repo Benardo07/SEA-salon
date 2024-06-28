@@ -56,7 +56,7 @@ export default function ReviewAdmin({reviews, updateReviews} : DataProps){
                 <h1 className="font-bold text-4xl">All Reviews</h1>
             </div>
             {reviews.map((review,index) => (
-                <div className="grid grid-cols-6 border-y-2 py-5 font-semibold gap-2">
+                <div key={review.id} className="grid grid-cols-6 border-y-2 py-5 font-semibold gap-2">
                     <div className="flex flex-col items-center text-center justify-center">
                         {review.user.fullName}
                     </div>

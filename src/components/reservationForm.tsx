@@ -76,7 +76,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
         const filteredServices = selectedBranch.services?.filter(service => service.typeId === serviceType);
         setServices(filteredServices);
     }
-  }, [serviceType]);
+  }, [serviceType,selectedBranch]);
 
   useEffect(() => {
     setServiceType('');

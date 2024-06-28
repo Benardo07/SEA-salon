@@ -66,7 +66,7 @@ export default function ReservationAdmin({reservations, updateReservation} : Dat
                 <h1 className="font-bold text-4xl">All Reservations</h1>
             </div>
             {reservations.map((reservation,index) => (
-                <div className="grid grid-cols-8 border-y-2 py-5 font-semibold gap-2">
+                <div key={reservation.id} className="grid grid-cols-8 border-y-2 py-5 font-semibold gap-2">
                     <div className="flex flex-col items-center text-center justify-center">
                         {reservation.reservationName}
                     </div>

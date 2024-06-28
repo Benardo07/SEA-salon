@@ -14,8 +14,8 @@ export default async function ServicePage(){
           <h2 className="text-[#0e141b] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5">Our Type Services</h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
             {services.map((service, index) => (
-              <Link href="/services">
-                <div key={index} className="flex flex-col gap-3 pb-3">
+              <Link key={index} href="/services">
+                <div  className="flex flex-col gap-3 pb-3">
                   <div
                     className="w-full relative bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
                     style={{ backgroundImage: `url(${service.imgUrl})` }}
