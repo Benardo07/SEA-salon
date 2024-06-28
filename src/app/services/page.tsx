@@ -19,7 +19,7 @@ export default async function Services() {
           <div className="flex flex-col w-3/4 max-w-[1260px] flex-1 gap-10">
             <h1 className="text-[#0b141e] tracking-light text-[32px] font-bold leading-tight px-4 text-left pb-3 pt-6">Our Services</h1>
             {serviceData.map((serviceType) => (
-              <ServicesSection title={serviceType.type} services={serviceType.services} />
+              <ServicesSection key={serviceType.type} title={serviceType.type} services={serviceType.services} />
             ))}
             
           </div>
