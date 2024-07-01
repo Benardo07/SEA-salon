@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ToastState } from "./loginForm";
 import Toast from "./toast";
+import PopUpConfimation from "./popupConfirmation";
 
 export interface ReservationObject {
     id: string;
@@ -25,43 +26,54 @@ interface DataProps {
     updateReservation: (newReservation: ReservationObject[]) => void;
 }
 export default function ReservationAdmin({reservations, updateReservation} : DataProps){
+    const [popupConfirmation, showPopupConfirmation] = useState<boolean>(false);
+    const [selectedReservation, setSelectedReservation] = useState('');
     const [toast, setToast] = useState<ToastState>({
         isOpen: false,
         message: "",
         type: "error",
     });
 
-    async function handleDelete(reservationId: string) {
-        if (confirm('Are you sure you want to delete this review?')) {
-            try{
-                const response = await fetch('/api/reservations', {
-                    method: 'DELETE',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      reservationId : reservationId,
-                    })
-                  });
-                const data = await response.json();
-    
-                if (response.ok) {
-                    console.log('Reservation Deleted:', data);
-                    updateReservation(data.newReservations)
-                    setToast({ isOpen: true, message: "Delete Success", type: "success" });
-    
-                } else {
-                    setToast({ isOpen: true, message: "Delete Failed", type: "error" });
-    
-                }
-            }catch(error){
+    const handleDeleteClick = (id: string) => {
+        // Deletion logic here
+        setSelectedReservation(id);
+        showPopupConfirmation(true);
+    }
+
+    async function handleDelete() {
+        
+        try{
+            const response = await fetch('/api/reservations', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    reservationId : selectedReservation,
+                })
+                });
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log('Reservation Deleted:', data);
+                updateReservation(data.newReservations)
+                setToast({ isOpen: true, message: "Delete Success", type: "success" });
+
+            } else {
                 setToast({ isOpen: true, message: "Delete Failed", type: "error" });
+
             }
-              
+        }catch(error){
+            setToast({ isOpen: true, message: "Delete Failed", type: "error" });
+        }finally{
+            showPopupConfirmation(false)
         }
+              
+        
     }
     return (
         <div className="w-full flex flex-col ">
+             {popupConfirmation && (<PopUpConfimation handleCancel={showPopupConfirmation} handleDelete={handleDelete} type='reservation'/>)}
             <div className="flex w-full justify-between items-center p-10">
                 <h1 className="font-bold text-4xl">All Reservations</h1>
             </div>
@@ -89,7 +101,7 @@ export default function ReservationAdmin({reservations, updateReservation} : Dat
                         {reservation.stylist.name}
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleDelete(reservation.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleDeleteClick(reservation.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
                             Delete
                         </button>
                     </div>

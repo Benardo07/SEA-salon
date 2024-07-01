@@ -65,5 +65,11 @@ body {
 }
 
 .scrollable-form::-webkit-scrollbar {
-  display: none;
+  width: 4px; 
+  background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.scrollable-form::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px; 
 }

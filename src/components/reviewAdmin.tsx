@@ -3,6 +3,7 @@ import { ToastState } from "./loginForm";
 import Toast from "./toast";
 import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
+import PopUpConfimation from "./popupConfirmation";
 
 export interface ReviewObjects {
     id: string;
@@ -20,20 +21,28 @@ interface DataProps {
     updateReviews: (newReviews: ReviewObjects[]) => void;
 }
 export default function ReviewAdmin({reviews, updateReviews} : DataProps){
+    const [popupConfirmation, showPopupConfirmation] = useState<boolean>(false);
+    const [selectedReview, setSelectedReview] = useState('');
     const [toast, setToast] = useState<ToastState>({
         isOpen: false,
         message: "",
         type: "error",
     });
-    async function handleDelete(reviewId: string) {
-        if (confirm('Are you sure you want to delete this review?')) {
+
+    const handleDeleteClick = (id: string) => {
+        // Deletion logic here
+        setSelectedReview(id);
+        showPopupConfirmation(true);
+    }
+    async function handleDelete() {
+        try{
             const response = await fetch('/api/review', {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  id : reviewId
+                  id : selectedReview
                 })
               });
             const data = await response.json();
@@ -47,8 +56,15 @@ export default function ReviewAdmin({reviews, updateReviews} : DataProps){
                 setToast({ isOpen: true, message: "Delete Failed", type: "error" });
 
             }
-              
+        }catch(error){
+            setToast({ isOpen: true, message: "Delete Failed", type: "error" });
+
+        }finally{
+            showPopupConfirmation(false);
         }
+            
+              
+        
     }
     return (
         <div className="w-full flex flex-col ">
@@ -73,7 +89,7 @@ export default function ReviewAdmin({reviews, updateReviews} : DataProps){
                         {review.createdAt.toLocaleString()}
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleDelete(review.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleDeleteClick(review.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
                             Delete
                         </button>
                     </div>
@@ -84,7 +100,8 @@ export default function ReviewAdmin({reviews, updateReviews} : DataProps){
                 message={toast.message}
                 type={toast.type}
                 closeToast={() => setToast({ ...toast, isOpen: false })}
-            />    
+            />   
+            {popupConfirmation && (<PopUpConfimation handleCancel={showPopupConfirmation} handleDelete={handleDelete} type='service'/>)}
         </div>
     )
 }

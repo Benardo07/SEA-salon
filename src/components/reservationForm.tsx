@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Calendar from './calendar';
-import TimeSelector from './timeSelector';
+import TimeSelector, { BookedTime } from './timeSelector';
 import BranchModal from './branchModal';
 import { Branch, Service, Stylist } from '@/app/reservation/page';
 import ServiceSwiper from './servceSwiper';
@@ -36,6 +36,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedStylist, setSelectedStylist] = useState<Stylist | null>(null);
   const [stylists, setStylists] = useState<Stylist[]>();
+  const [bookedTime, setBookedTime] = useState<BookedTime[]>();
   const [services, setServices] = useState<Service[]>();
   const [selectedBranch, setSelectedBranch] = useState<Branch>();
   const [showBranchModal, setShowBranchModal] = useState(false);
@@ -54,12 +55,40 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
     type: "error",
   });
 
-  const handleDateClick = (date: string) => {
+  const handleDateClick = async (date: string) => {
     setSelectedDate(date);
+
+    try {
+      const response = await fetch('/api/bookedTime', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          stylistId: selectedStylist?.id,
+          date: date
+        })
+      });
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data);
+      setBookedTime(data.bookedTime)
+
+      } else {
+          
+
+      }
+
+    }catch(error){
+
+    }
+    
   };
 
-  const handleTimeClick = (time: string) => {
-    setSelectedTime(time);
+  const handleStylistClick = (stylist: Stylist) => {
+    setSelectedStylist(stylist);
+    setSelectedDate('');
+    setBookedTime(undefined);
   };
 
   const handleServiceClick = (servicetype: string) => {
@@ -324,7 +353,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
           <p className=' px-4 mb-10'>Click to select</p>
           {stylists ? (
             <div>
-              <StylistSwiper stylists={stylists} onSelectStylist={setSelectedStylist}/>
+              <StylistSwiper stylists={stylists} onSelectStylist={handleStylistClick}/>
             </div>
           ): 
           <div className='w-full flex items-center justify-center h-40 text-black'>No stylist in this branch yet</div>
@@ -334,11 +363,19 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
         
         <div className='flex flex-col px-4 py-3'>
           <h3 className="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] my-10">Date and time</h3>
-          <div className="flex flex-wrap items-center justify-center gap-10 p-4 ">
-            <Calendar onDateClick={handleDateClick} selectedDate={selectedDate} />
-            {selectedDate && (
-              <TimeSelector selectedTime={selectedTime} selectedDate={selectedDate} onTimeClick={handleTimeClick} />
-            )}
+          <div >
+          {selectedStylist ? (
+            <div className="flex flex-wrap items-center justify-center gap-10 p-4 ">
+              <Calendar selectedDate={selectedDate} onDateClick={handleDateClick} />
+              {selectedDate && (
+                <TimeSelector selectedDate={selectedDate} selectedTime={selectedTime} bookedTime={bookedTime} onTimeClick={setSelectedTime} />
+              )}
+            </div>
+          ) : (
+            <div className="text-center py-4 text-black">
+              <p>Please select a stylist to proceed with date and time selection.</p>
+            </div>
+          )}
             
           </div>
           {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}

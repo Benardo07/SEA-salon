@@ -3,6 +3,7 @@ import { Branch } from "@/app/reservation/page"
 import { useState } from "react";
 import PopupMaps from "./popupMaps";
 import { ur } from "@faker-js/faker";
+import RevealTitle from "./ui/animations/revealTitile";
 
 interface propsData {
     branches : Branch[];
@@ -23,19 +24,21 @@ export default function BranchList({branches} : propsData){
             {popup && (<PopupMaps locationURL={url} onClose={() => showPopup(false)}/>)}
             <h1 className="text-3xl font-bold text-black">All Branch</h1>
             <div className="flex flex-row gap-10 flex-wrap items-center w-full justify-center">
-                {branches.map((branch) => (
-                    <div key={branch.id} className="flex flex-col justify-center gap-3 rounded-2xl border-2 w-80 p-4 min-h-[250px]">
-                        <p className='font-bold'>{branch.name}</p>
-                        <p>{branch.address}</p>
-                        <p>Open {branch.openingTime} - Close {branch.closingTime}</p>
-                        <p>{branch.branchTelp}</p>
-                        {branch.locationURL && (
-                            <div className="w-full flex justify-end">
-                                <button className="px-4 py-2 font-bold bg-[#1980e6] hover:bg-opacity-55 rounded-full" onClick={() => handleMapClick(branch.locationURL)}>View Map</button>
-                            </div>
-                        )}
-                        
-                    </div>
+                {branches.map((branch, index) => (
+                    <RevealTitle key={branch.id} custom={index*1} >
+                        <div  className="flex flex-col justify-center gap-3 rounded-2xl border-2 w-80 p-4 min-h-[250px]">
+                            <p className='font-bold'>{branch.name}</p>
+                            <p>{branch.address}</p>
+                            <p>Open {branch.openingTime} - Close {branch.closingTime}</p>
+                            <p>{branch.branchTelp}</p>
+                            {branch.locationURL && (
+                                <div className="w-full flex justify-end">
+                                    <button className="px-4 py-2 font-bold bg-[#1980e6] hover:bg-opacity-55 rounded-full" onClick={() => handleMapClick(branch.locationURL)}>View Map</button>
+                                </div>
+                            )}
+                            
+                        </div>
+                    </RevealTitle>
                 ))}
             </div>
         </div>

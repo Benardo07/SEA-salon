@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { ToastState } from './loginForm';
 import { useRouter } from 'next/navigation';
 import Toast from './toast';
-import { Branch } from '@/app/reservation/page';
+import { Branch} from '@/app/reservation/page';
 import { ServiceType } from './dashboard';
+import { ServiceObject } from './adminService';
 
 interface PropsData {
     onClose: (condition: boolean) => void;
@@ -18,7 +19,6 @@ interface FormData {
     typeId: string;
     imgUrl?: string;
     imageFile?: File | null;
-    useUrl: boolean;
     price: string;
 }
 
@@ -41,7 +41,6 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
         description: '',
         typeId: '',
         price: '',
-        useUrl: true,
         imgUrl: '',
         imageFile: undefined 
     });
@@ -63,22 +62,42 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
         }
     };
 
-    const toggleImageInputType = () => {
-        setFormData(prev => ({ ...prev, useUrl: !prev.useUrl, imgUrl: '', imageFile: undefined }));
-    };
 
     const validateForm = (): boolean => {
         let isValid = true;
         const newErrors: FormErrors = {};
-
-        // Validations go here
-        if (!formData.serviceName) {
-            newErrors.serviceName = 'Service name is required';
+    
+        if (!formData.serviceName.trim()) {
+            newErrors.serviceName = 'Service name is required.';
             isValid = false;
         }
-
-        // Add more validation checks as necessary
-
+    
+        if (formData.duration <= 0) {
+            newErrors.duration = 'Duration must be a positive number.';
+            isValid = false;
+        }
+    
+        if (!formData.description.trim()) {
+            newErrors.description = 'Description is required.';
+            isValid = false;
+        }
+    
+        if (!formData.typeId) {
+            newErrors.typeId = 'Please select a service type.';
+            isValid = false;
+        }
+    
+        if (!formData.price || isNaN(Number(formData.price)) || Number(formData.price) <= 0) {
+            newErrors.price = 'Please enter a valid price.';
+            isValid = false;
+        }
+    
+        // Validate image file if required, assuming you want to check for an image
+        if (formData.imageFile && !formData.imageFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+            newErrors.imgUrl = 'Please upload a valid image (jpg, jpeg, png, gif).';
+            isValid = false;
+        }
+    
         setErrors(newErrors);
         return isValid;
     };
@@ -130,9 +149,9 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
 
         setIsLoading(true);
         console.log(formData);
-        let imageUrl = formData.imgUrl;
+        let imageUrl = '';
         
-        if (!formData.useUrl && formData.imageFile) {
+        if (formData.imageFile) {
             // Assume a function uploadImage exists to handle file uploads
             imageUrl = await uploadFileToCloudinary(formData.imageFile);
         }
@@ -158,7 +177,6 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
             if (response.ok) {
                 setToast({ isOpen: true, message: 'Service created successfully', type: 'success' });
                 onClose(true);
-                router.push('/adminDashboard');
                 router.refresh();
             } else {
                 throw new Error(data.message || 'Failed to create service');
@@ -179,7 +197,7 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
                     </div>
                 )}
                 <h1 className="font-bold text-3xl">Add New Service</h1>
-                <form className="flex flex-col overflow-scroll scrollable-form" onSubmit={handleSubmit}>
+                <form className="flex flex-col overflow-scroll h-full scrollable-form" onSubmit={handleSubmit}>
                     <div className="flex max-w-[480px] flex-1 flex-wrap items-end gap-4 px-4 py-3">
                         <label className="flex flex-col min-w-40 flex-1">
                             <p className="text-[#111518] text-base font-bold leading-normal pb-2">Service Name</p>
@@ -246,21 +264,9 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
                         <label className="flex flex-col min-w-40 flex-1">
                             <p className="text-[#111518] text-base font-bold leading-normal pb-2">Image URL</p>
                             <p>Choose input option</p>
-                            <div className='flex flex-row gap-10 mb-3'>
-                                <label>
-                                    <input type="radio" checked={formData.useUrl} onChange={toggleImageInputType} />
-                                    Use Image URL
-                                </label>
-                                <label>
-                                    <input type="radio" checked={!formData.useUrl} onChange={toggleImageInputType} />
-                                    Upload Image
-                                </label>
-                            </div>
-                                {formData.useUrl ? (
-                                    <input type="text" name="imgUrl" value={formData.imgUrl} onChange={handleChange} placeholder="Enter image URL" required={!formData.useUrl} className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111518] focus:outline-0 focus:ring-0 border border-[#dbe1e6] bg-white focus:border-[#dbe1e6] h-14 placeholder:text-[#60778a] p-[15px] text-base font-normal leading-normal" />
-                                ) : (
-                                    <input type="file" name="imageFile" onChange={handleFileChange} required={formData.useUrl} className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111518] focus:outline-0 focus:ring-0 border border-[#dbe1e6] bg-white focus:border-[#dbe1e6] h-14 placeholder:text-[#60778a] p-[15px] text-base font-normal leading-normal"/>
-                                )}
+                            
+                            <input type="file" name="imageFile" onChange={handleFileChange} className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111518] focus:outline-0 focus:ring-0 border border-[#dbe1e6] bg-white focus:border-[#dbe1e6] h-14 placeholder:text-[#60778a] p-[15px] text-base font-normal leading-normal"/>
+ 
                         </label>
                         {errors.imgUrl && <p className="text-red-500 text-sm mt-1">{errors.imgUrl}</p>}
                     </div>
