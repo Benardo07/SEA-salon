@@ -117,7 +117,7 @@ export default function StylistPopup({ onClose, branchId }: { onClose: (conditio
       const data = await response.json();
       if (response.ok) {
         setToast({ isOpen: true, message: 'Stylist created successfully', type: 'success' });
-        onClose(true);
+        onClose(false);
         router.refresh();
       } else {
         throw new Error(data.message || 'Failed to create stylist');
