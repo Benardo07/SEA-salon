@@ -1,4 +1,3 @@
-```markdown
 # SEA Salon Website
 
 ## Description
