@@ -6,6 +6,7 @@ import ReviewBar from "./reviewBar";
 import RevealDesc from "../ui/animations/revealdesc";
 
 interface ReviewObject {
+    id: string;
     createdAt: Date;
     starRating: number;
     comment: string;
@@ -20,6 +21,7 @@ interface ReviewProps {
 }
 
 export default function Reviews({ reviews }: ReviewProps) {
+    console.log(reviews);
     const [allReviews, setReviews] = useState<ReviewObject[]>(reviews);
     const [averageRating, setAverageRating] = useState(0);
     const [totalReviews, setTotalReviews] = useState(0);
