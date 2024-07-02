@@ -9,6 +9,7 @@ import Loading from '@/app/loading';
 interface PropsData {
     onClose: (condition: boolean) => void;
     branch: Branch | null;
+    updateBranches: (newBracnhs: Branch[]) => void;
 }
 
 interface FormData {
@@ -29,7 +30,7 @@ interface FormErrors {
     gmapsUrl?: string;
 }
 
-export default function BranchPopup({onClose , branch} : PropsData) {
+export default function BranchPopup({onClose , branch , updateBranches} : PropsData) {
     const router = useRouter();
     const [isloading, setIsLoading] = useState<boolean>(false);
     const [isupdate, setIsUpdate] = useState<boolean>(false);
@@ -123,7 +124,9 @@ export default function BranchPopup({onClose , branch} : PropsData) {
                     if (response.ok) {
                         
                         setToast({ isOpen: true, message: "Update Success", type: "success" });
+                        updateBranches(data.newbranches)
                         onClose(false);
+                        
                         router.refresh();
                         
                         
@@ -152,7 +155,7 @@ export default function BranchPopup({onClose , branch} : PropsData) {
                     if (response.ok) {
                         
                         setToast({ isOpen: true, message: "Write Success", type: "success" });
-                    
+                        updateBranches(data.newbranches)
                         onClose(false)
                         router.refresh()
                         

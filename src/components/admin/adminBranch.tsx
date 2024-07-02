@@ -18,6 +18,7 @@ interface DataProps {
 
 export default function AdminBranch({ branches, serviceTypes, updateBranch }: DataProps) {
     const router = useRouter();
+    const [allbranches, setBranches] = useState<Branch[]>(branches);
     const [popupConfirmation, showPopupConfirmation] = useState<boolean>(false);
     const [showPopUp, setShowPopUp] = useState<boolean>(false);
     const [showStylistPopup, setshowStylisPopup] = useState<boolean>(false);
@@ -101,7 +102,7 @@ export default function AdminBranch({ branches, serviceTypes, updateBranch }: Da
                     Add Branch
                 </button>
             </div>
-            {branches.map((branch, index) => (
+            {allbranches.map((branch, index) => (
                 <div key={index} className="grid grid-cols-9 border-y-2 py-5 font-semibold gap-2">
                     <div className="flex flex-col items-center text-center justify-center">
                         {branch.name}
@@ -147,7 +148,7 @@ export default function AdminBranch({ branches, serviceTypes, updateBranch }: Da
                 </div>
             ))}
             {popupConfirmation && (<PopUpConfimation handleCancel={showPopupConfirmation} handleDelete={handleDelete} type='branch'/>)}
-            {showPopUp && <BranchPopup branch={selectedBranch} onClose={setShowPopUp}/>}
+            {showPopUp && <BranchPopup branch={selectedBranch} onClose={setShowPopUp} updateBranches={setBranches}/>}
             {showSerPop && <ServicePopup branchId={selectedBranch ? selectedBranch.id : null} serviceTypes={serviceTypes} onClose={setService}/>}
             {showStylistPopup && selectedBranch && (<StylistPopup onClose={setshowStylisPopup} branchId={selectedBranch?.id}/>)}
             <Toast
