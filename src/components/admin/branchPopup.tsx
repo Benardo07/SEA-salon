@@ -123,7 +123,8 @@ export default function BranchPopup({onClose , branch} : PropsData) {
                     if (response.ok) {
                         
                         setToast({ isOpen: true, message: "Update Success", type: "success" });
-                        onClose(true);
+                        onClose(false);
+                        router.push("/adminDashboard")
                         router.refresh();
                         
                         
@@ -153,6 +154,7 @@ export default function BranchPopup({onClose , branch} : PropsData) {
                         setToast({ isOpen: true, message: "Write Success", type: "success" });
                     
                         onClose(false)
+                        router.push("/adminDashboard")
                         router.refresh()
         
                         
