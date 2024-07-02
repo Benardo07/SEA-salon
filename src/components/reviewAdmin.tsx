@@ -89,7 +89,7 @@ export default function ReviewAdmin({reviews, updateReviews} : DataProps){
                         {review.createdAt.toLocaleString()}
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleDeleteClick(review.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleDeleteClick(review.id)} className="bg-red-600 text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Delete
                         </button>
                     </div>

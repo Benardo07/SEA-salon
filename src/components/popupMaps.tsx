@@ -37,7 +37,7 @@ export default function PopupMaps({locationURL, onClose} : dataProps) {
               
                     
                 </div>
-                <button className="px-4 py-3 bg-[#1980e6] rounded-full" onClick={onClose}>Close</button>
+                <button className="px-4 py-3 bg-[#1980e6] rounded-full hover:bg-opacity-75 transition duration-300 ease-in-out" onClick={onClose}>Close</button>
             </div>
         </div>
     )

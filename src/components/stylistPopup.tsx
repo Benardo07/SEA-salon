@@ -166,8 +166,8 @@ export default function StylistPopup({ onClose, branchId }: { onClose: (conditio
 
           {/* Buttons */}
           <div className="flex space-x-4 p-4">
-          <button type="button" onClick={() => onClose(false)} className="px-5 py-3 rounded-full border-2">Cancel</button>
-          <button type="submit" className="px-5 py-3 rounded-full bg-[#1980e6] text-white">Create</button>
+          <button type="button" onClick={() => onClose(false)} className="px-5 py-3 rounded-full border-2 hover:bg-opacity-75 transition duration-300 ease-in-out">Cancel</button>
+          <button type="submit" className="px-5 py-3 rounded-full bg-[#1980e6] text-white hover:bg-opacity-75 transition duration-300 ease-in-out">Create</button>
           </div>
         </form>
 

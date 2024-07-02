@@ -44,6 +44,9 @@ export default function Navbar() {
   });
   
   const handleNavigation = (url: string) => {
+    if(isNavbarExpanded){
+      setIsNavbarExpanded(false)
+    }
     router.push(url);
   };
 
@@ -53,7 +56,7 @@ export default function Navbar() {
       
       await signOut({ redirect: false });
       setToast({ isOpen: true, message: "Logout successful", type: "success" });
-
+      setIsNavbarExpanded(false);
       setTimeout(() => {
         router.push('/login');
       }, 500); 
@@ -106,7 +109,18 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
+              
+
         <div className="flex xl:flex-row flex-col gap-5">
+            {session && session.user.role === "ADMIN" && (
+                <button
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                onClick={() =>handleNavigation('/adminDashboard')} // Add correct navigation URL
+              >
+                <span className="">Admin Dashboard</span>
+              </button>
+            )}  
+              
           {session && session.user ? (
               <button
               className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"

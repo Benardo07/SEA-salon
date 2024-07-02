@@ -33,7 +33,7 @@ export default function BranchList({branches} : propsData){
                             <p>{branch.branchTelp}</p>
                             {branch.locationURL && (
                                 <div className="w-full flex justify-end">
-                                    <button className="px-4 py-2 font-bold bg-[#1980e6] hover:bg-opacity-55 rounded-full" onClick={() => handleMapClick(branch.locationURL)}>View Map</button>
+                                    <button className="px-4 py-2 font-bold bg-[#1980e6] hover:bg-opacity-55 rounded-full transition duration-300 ease-in-out" onClick={() => handleMapClick(branch.locationURL)}>View Map</button>
                                 </div>
                             )}
                             

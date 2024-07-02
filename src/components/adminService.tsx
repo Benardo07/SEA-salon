@@ -93,10 +93,10 @@ export default function AdminService({ services,branchName, branchId , servicety
             <div className="flex w-full justify-between items-center p-10">
                 <h1 className="font-bold text-4xl">All Services in {branchName}</h1>
                 <div className='flex flex-row gap-10'>
-                    <button onClick={() => handleAddService(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                    <button onClick={() => handleAddService(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                         Add Service
                     </button>
-                    <button onClick={() => handleBack(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                    <button onClick={() => handleBack(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                         Back Dashboard
                     </button>
                 </div>
@@ -120,7 +120,7 @@ export default function AdminService({ services,branchName, branchId , servicety
                         {service.description}
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleDeleteClick(service.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleDeleteClick(service.id)} className="bg-red-600 text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Delete
                         </button>
                     </div>

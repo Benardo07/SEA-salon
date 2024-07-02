@@ -73,10 +73,10 @@ export default function AdminStylist({stylists , branchname, branchId} : DataPro
         <div className="flex w-full justify-between items-center p-10">
             <h1 className="font-bold text-4xl">All Stylist in {branchname}</h1>
             <div className='flex flex-row gap-10'>
-                <button onClick={() => handleAddStylist(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                <button onClick={() => handleAddStylist(branchId)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                     Add Stylist
                 </button>
-                <button onClick={() => handleBack()} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                <button onClick={() => handleBack()} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                     Back Dashboard
                 </button>
             </div>
@@ -94,7 +94,7 @@ export default function AdminStylist({stylists , branchname, branchId} : DataPro
                     <Image src={stylist.imgUrl} width={100} height={133} alt="stylist"></Image>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                    <button onClick={() => handleDeleteClick(stylist.id)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                    <button onClick={() => handleDeleteClick(stylist.id)} className="bg-red-600 text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                         Delete
                     </button>
                 </div>

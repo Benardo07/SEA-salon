@@ -286,7 +286,7 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
                 </div>
               ) : (<div className='w-80  h-24 flex flex-col items-center justify-center border-2 rounded-2xl'>None</div>)}
 
-              <button type="button" onClick={() => setShowBranchModal(true)} className="px-3 w-40 md:w-auto md:px-5 bg-[#1980e6] hover:bg-opacity-50 font-bold py-1 md:py-3 h-10 md:h-16 rounded-full border-2">
+              <button type="button" onClick={() => setShowBranchModal(true)} className="px-3 w-40 md:w-auto md:px-5 bg-[#1980e6] hover:bg-opacity-75 transition duration-300 ease-in-out font-bold py-1 md:py-3 h-10 md:h-16 rounded-full border-2">
                   Select Branch
               </button>
             </div>
@@ -383,8 +383,8 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
         
         
         <div className="flex items-center justify-center gap-20 font-bold w-full mt-5">
-          <button type="button" className="px-5 py-3 rounded-full border-2">Cancel</button>
-          <button type="submit" className="px-5 py-3 rounded-full bg-[#1980e6] text-white">Reserve</button>
+          <button type="button" className="px-5 py-3 rounded-full border-2 hover:bg-opacity-75 transition duration-300 ease-in-out">Cancel</button>
+          <button type="submit" className="px-5 py-3 rounded-full bg-[#1980e6] text-white hover:bg-opacity-75 transition duration-300 ease-in-out">Reserve</button>
         </div>
       </form>
       <Toast

@@ -99,7 +99,7 @@ const ReviewPage: React.FC = () => {
             </div>
             <div className="flex px-4 py-3 justify-end">
               <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-75 transition duration-300 ease-in-out"
                 onClick={submitReview}
               >
                 <span className="truncate">Post</span>

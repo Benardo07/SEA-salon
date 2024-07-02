@@ -96,7 +96,7 @@ export default function AdminBranch({ branches, serviceTypes, updateBranch }: Da
         <div className="w-full flex flex-col ">
             <div className="flex w-full justify-between items-center p-10">
                 <h1 className="font-bold text-4xl">All Branches</h1>
-                <button className="bg-[#1980e6] text-white font-bold rounded-full px-5 py-3" onClick={handleAddBranch}>
+                <button className="bg-[#1980e6] text-white font-bold rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out" onClick={handleAddBranch}>
                     Add Branch
                 </button>
             </div>
@@ -112,34 +112,34 @@ export default function AdminBranch({ branches, serviceTypes, updateBranch }: Da
                         {branch.openingTime} - {branch.closingTime}
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleAddService(branch)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleAddService(branch)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Add Service
                         </button>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleAddStylist(branch)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleAddStylist(branch)} className="bg-[#1980e6] text-white rounded-full  px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Add Stylist
                         </button>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleViewService(branch.id)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleViewService(branch.id)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             View Service
                         </button>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleViewStylist(branch.id)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleViewStylist(branch.id)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             View Stylist
                         </button>
                     </div>
                     
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleEditBranch(branch)} className="bg-[#1980e6] text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleEditBranch(branch)} className="bg-[#1980e6] text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Edit
                         </button>
                     </div>
 
                     <div className="flex flex-col items-center justify-center">
-                        <button onClick={() => handleDeleteClick(branch)} className="bg-red-600 text-white rounded-full px-5 py-3">
+                        <button onClick={() => handleDeleteClick(branch)} className="bg-red-600 text-white rounded-full px-5 py-3 hover:bg-opacity-75 transition duration-300 ease-in-out">
                             Delete
                         </button>
                     </div>

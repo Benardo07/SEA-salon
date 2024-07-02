@@ -65,9 +65,9 @@ const BranchModal: React.FC<BranchModalProps> = ({ isOpen,branches, selected, on
           <div className="text-red-500 text-center mt-2">{errorMessage}</div>
         )}
         <div className='flex justify-center gap-4'>
-            <button onClick={handleSelectClick} className="mt-4 py-3 w-28 rounded-full border">Select</button>
+            <button onClick={handleSelectClick} className="mt-4 py-3 w-28 rounded-full border hover:bg-opacity-75 transition duration-300 ease-in-out">Select</button>
             
-            <button onClick={handleCancel} className="mt-4 py-3 w-28 rounded-full border">Cancel</button>
+            <button onClick={handleCancel} className="mt-4 py-3 w-28 rounded-full border hover:bg-opacity-75 transition duration-300 ease-in-out">Cancel</button>
             
         </div>
       </div>
