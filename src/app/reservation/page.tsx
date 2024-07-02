@@ -1,4 +1,4 @@
-import ReservationForm from "@/components/reservationForm";
+import ReservationForm from "@/components/reservation/reservationForm";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";

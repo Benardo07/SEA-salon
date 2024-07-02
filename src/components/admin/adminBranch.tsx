@@ -5,9 +5,9 @@ import BranchPopup from "./branchPopup";
 import ServicePopup from "./servicePopup";
 import { ServiceType } from "./dashboard";
 import { useRouter } from 'next/navigation';
-import Toast from './toast';
-import { ToastState } from './loginForm';
-import PopUpConfimation from './popupConfirmation';
+import Toast from '../toast';
+import { ToastState } from '../loginForm';
+import PopUpConfimation from '../popupConfirmation';
 import StylistPopup from './stylistPopup';
 
 interface DataProps {

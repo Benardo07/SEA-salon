@@ -2,10 +2,10 @@
 import { Stylist } from "@/app/reservation/page"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import PopUpConfimation from "./popupConfirmation";
+import PopUpConfimation from "../popupConfirmation";
 import Image from "next/image";
-import Toast from "./toast";
-import { ToastState } from "./loginForm";
+import Toast from "../toast";
+import { ToastState } from "../loginForm";
 import StylistPopup from "./stylistPopup";
 
 

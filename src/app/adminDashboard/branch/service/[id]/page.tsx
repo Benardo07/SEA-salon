@@ -1,4 +1,4 @@
-import AdminService from "@/components/adminService";
+import AdminService from "@/components/admin/adminService";
 import { db } from "@/lib/db";
 
 export default async function AdminBranch({ params }: { params: { id: string } }) {

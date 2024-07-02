@@ -48,6 +48,7 @@ export default function Navbar() {
       setIsNavbarExpanded(false)
     }
     router.push(url);
+    router.refresh()
   };
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {

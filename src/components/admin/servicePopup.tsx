@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ToastState } from './loginForm';
+import { ToastState } from '../loginForm';
 import { useRouter } from 'next/navigation';
-import Toast from './toast';
+import Toast from '../toast';
 import { Branch} from '@/app/reservation/page';
 import { ServiceType } from './dashboard';
 import { ServiceObject } from './adminService';

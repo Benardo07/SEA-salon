@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Toast from './toast';
-import { ToastState } from './loginForm';
+import Toast from '../toast';
+import { ToastState } from '../loginForm';
 
 interface FormData {
   name: string;

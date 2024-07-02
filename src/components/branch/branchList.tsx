@@ -3,7 +3,7 @@ import { Branch } from "@/app/reservation/page"
 import { useState } from "react";
 import PopupMaps from "./popupMaps";
 import { ur } from "@faker-js/faker";
-import RevealTitle from "./ui/animations/revealTitile";
+import RevealTitle from "../ui/animations/revealTitile";
 
 interface propsData {
     branches : Branch[];

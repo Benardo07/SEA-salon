@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
-import Toast from "./toast";
-import { ToastState } from "./loginForm";
-import PopUpConfimation from './popupConfirmation';
+import Toast from "../toast";
+import { ToastState } from "../loginForm";
+import PopUpConfimation from '../popupConfirmation';
 import { ServiceType } from './dashboard';
 import ServicePopup from './servicePopup';
 import { useRouter } from 'next/navigation';

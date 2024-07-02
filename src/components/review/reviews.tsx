@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Star from "./star";
 import ReviewBar from "./reviewBar";
-import RevealDesc from "./ui/animations/revealdesc";
+import RevealDesc from "../ui/animations/revealdesc";
 
 interface ReviewProps {
     reviews: {

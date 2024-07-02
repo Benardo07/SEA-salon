@@ -1,4 +1,4 @@
-import ReservationList from "@/components/reservationList";
+import ReservationList from "@/components/reservation/reservationList";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";

@@ -7,11 +7,11 @@ import BranchModal from './branchModal';
 import { Branch, Service, Stylist } from '@/app/reservation/page';
 import ServiceSwiper from './servceSwiper';
 import StylistSwiper from './stylistSwiper';
-import { ToastState } from './loginForm';
-import Toast from './toast';
+import { ToastState } from '../loginForm';
+import Toast from '../toast';
 import { useRouter } from 'next/navigation';
-import Loading from '../app/loading';
-import ServicesSection from './serviceSection';
+import Loading from '../../app/loading';
+
 
 interface ServiceTypes {
   id: string;

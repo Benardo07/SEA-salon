@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ToastState } from './loginForm';
+import { ToastState } from '../loginForm';
 import { useRouter } from 'next/navigation';
-import Toast from './toast';
+import Toast from '../toast';
 import { tr } from '@faker-js/faker';
 import { Branch } from '@/app/reservation/page';
 import Loading from '@/app/loading';

@@ -1,4 +1,4 @@
-import ServicesSection from "@/components/serviceSection";
+import ServicesSection from "@/components/service/serviceSection";
 import { db } from "@/lib/db";
 import { Service } from "../reservation/page";
 import fetchServices from "../actions/fetchServices";

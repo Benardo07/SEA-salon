@@ -1,5 +1,5 @@
-import ReviewPage from "@/components/review";
-import Reviews from "@/components/reviews";
+import ReviewPage from "@/components/review/review";
+import Reviews from "@/components/review/reviews";
 import { db } from "@/lib/db";
 
 export default async function Review(){

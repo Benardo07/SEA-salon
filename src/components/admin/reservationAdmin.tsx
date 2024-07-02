@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ToastState } from "./loginForm";
-import Toast from "./toast";
-import PopUpConfimation from "./popupConfirmation";
+import { ToastState } from "../loginForm";
+import Toast from "../toast";
+import PopUpConfimation from "../popupConfirmation";
 
 export interface ReservationObject {
     id: string;

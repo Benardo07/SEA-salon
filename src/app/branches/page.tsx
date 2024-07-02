@@ -1,4 +1,4 @@
-import BranchList from "@/components/branchList";
+import BranchList from "@/components/branch/branchList";
 import { db } from "@/lib/db";
 
 export default async function Branches() {

@@ -1,5 +1,5 @@
-import AdminService from "@/components/adminService";
-import AdminStylist from "@/components/adminStylist";
+import AdminService from "@/components/admin/adminService";
+import AdminStylist from "@/components/admin/adminStylist";
 import { db } from "@/lib/db";
 
 export default async function AdminBranchStylist({ params }: { params: { id: string } }) {

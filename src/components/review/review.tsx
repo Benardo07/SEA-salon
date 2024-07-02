@@ -4,9 +4,9 @@ import RatingRadio from './ratingRadio';
 import ReviewBar from './reviewBar';
 import Star from './star';
 import { useRouter } from 'next/navigation';
-import Loading from '../app/loading';
-import Toast from './toast';
-import { ToastState } from './loginForm';
+import Loading from '../../app/loading';
+import Toast from '../toast';
+import { ToastState } from '../loginForm';
 
 const ReviewPage: React.FC = () => {
   const router = useRouter();

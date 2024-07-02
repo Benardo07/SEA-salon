@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ToastState } from "./loginForm";
-import Toast from "./toast";
+import { ToastState } from "../loginForm";
+import Toast from "../toast";
 import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
-import PopUpConfimation from "./popupConfirmation";
+import PopUpConfimation from "../popupConfirmation";
 
 export interface ReviewObjects {
     id: string;

@@ -1,4 +1,4 @@
-import ReviewPage from "@/components/review";
+import ReviewPage from "@/components/review/review";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

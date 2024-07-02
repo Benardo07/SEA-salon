@@ -1,4 +1,4 @@
-import LandingPage from "@/components/landingpage";
+import LandingPage from "@/components/homepage/landingpage";
 import Image from "next/image";
 import Homepage from "./homepage/page";
 

@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import Dashboard from "../../components/dashboard";
+import Dashboard from "../../components/admin/dashboard";
 import { tr } from "@faker-js/faker";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
