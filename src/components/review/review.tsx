@@ -48,11 +48,8 @@ const ReviewPage: React.FC = () => {
       if (response.ok) {
         console.log('Review submitted:', data);
         setToast({ isOpen: true, message: "Write Success", type: "success" });
-      
-        router.push('/reviewPage');
         router.refresh()
-
-        
+        router.push('/reviewPage');
       } else {
         setToast({ isOpen: true, message: "Write Failed", type: "error" });
         throw new Error(data.message || 'Failed to submit review');
