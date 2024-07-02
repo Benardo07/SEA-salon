@@ -1,24 +1,29 @@
 "use client";
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Star from "./star";
 import ReviewBar from "./reviewBar";
 import RevealDesc from "../ui/animations/revealdesc";
 
-interface ReviewProps {
-    reviews: {
-      createdAt: Date;
-      starRating: number;
-      comment: string;
-      user: {
+interface ReviewObject {
+    createdAt: Date;
+    starRating: number;
+    comment: string;
+    user: {
         fullName: string;
         email: string;
-      };
-    }[];
+    };
+}
+
+interface ReviewProps {
+    reviews: ReviewObject[];
 }
 
 export default function Reviews({ reviews }: ReviewProps) {
+    const [allReviews, setReviews] = useState<ReviewObject[]>(reviews);
+    const [averageRating, setAverageRating] = useState(0);
+    const [totalReviews, setTotalReviews] = useState(0);
 
-    
     // Helper function to format date
     const formattedDate = (date: Date) => {
         return new Date(date).toLocaleString('en-US', {
@@ -32,20 +37,18 @@ export default function Reviews({ reviews }: ReviewProps) {
         });
     }
 
-    // Calculate the total number of reviews
-    const totalReviews = reviews.length;
-
-    // Calculate the average star rating
-    const averageRating = totalReviews > 0 
-        ? reviews.reduce((acc, curr) => acc + curr.starRating, 0) / totalReviews
-        : 0;
+    useEffect(() => {
+        setTotalReviews(reviews.length);
+        setAverageRating(reviews.length > 0 
+            ? reviews.reduce((acc, curr) => acc + curr.starRating, 0) / reviews.length
+            : 0);
+    }, [reviews]);  // Re-run this effect if reviews change
 
     // Function to calculate the percentage of each star rating for the bar display
     const calculatePercentage = (star: number) => {
         if (totalReviews === 0) return 0;
         const count = reviews.filter(review => review.starRating === star).length;
-        const percentage = (count / totalReviews) * 100;
-        return parseFloat(percentage.toFixed(1));
+        return parseFloat(((count / totalReviews) * 100).toFixed(1));
     }
 
     return (
@@ -77,7 +80,7 @@ export default function Reviews({ reviews }: ReviewProps) {
                         <div className="flex flex-col gap-6 px-4 py-10">
                             {reviews.map((review, index) => (
                                 <RevealDesc custom={index*0.5} key={review.user.email}>
-                                    <div  className="flex flex-col p-4 border-b-2 border-black">
+                                    <div className="flex flex-col p-4 border-b-2 border-black">
                                         <p className="text-lg font-bold text-black">{review.user.fullName}</p>
                                         <p className="text-base text-[#0e141b]">{formattedDate(review.createdAt)}</p>
                                         <div className="flex gap-0.5 mt-2 mb-2">
