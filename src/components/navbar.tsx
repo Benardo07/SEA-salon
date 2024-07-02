@@ -115,7 +115,7 @@ export default function Navbar() {
         <div className="flex xl:flex-row flex-col gap-5">
             {session && session.user.role === "ADMIN" && (
                 <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#136bb3] transition duration-300 ease-in-out"
                 onClick={() =>handleNavigation('/adminDashboard')} // Add correct navigation URL
               >
                 <span className="">Admin Dashboard</span>
@@ -124,14 +124,14 @@ export default function Navbar() {
               
           {session && session.user ? (
               <button
-              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#136bb3] transition duration-300 ease-in-out"
               onClick={handleLogout} // Add correct navigation URL
             >
               <span className="">Log Out</span>
             </button>
           ):(
             <button
-              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#136bb3] transition duration-300 ease-in-out"
               onClick={() => handleNavigation('/login')} // Add correct navigation URL
             >
               <span className="">log In</span>
@@ -139,7 +139,7 @@ export default function Navbar() {
           )}
           
           <button
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#136bb3] transition duration-300 ease-in-out"
             onClick={() => handleNavigation('/reservation')} // Add correct navigation URL
           >
             <span className="">Book Now</span>
