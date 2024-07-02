@@ -176,7 +176,7 @@ export default function ServicePopup({ onClose,serviceTypes, branchId }: PropsDa
             const data = await response.json();
             if (response.ok) {
                 setToast({ isOpen: true, message: 'Service created successfully', type: 'success' });
-                onClose(true);
+                onClose(false);
                 router.refresh();
             } else {
                 throw new Error(data.message || 'Failed to create service');

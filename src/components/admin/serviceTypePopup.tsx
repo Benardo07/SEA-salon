@@ -101,7 +101,7 @@ export default function ServiceTypePopup({ onClose }: { onClose: (condition: boo
       const data = await response.json();
       if (response.ok) {
         setToast({ isOpen: true, message: 'Service Type created successfully', type: 'success' });
-        onClose(true);
+        onClose(false);
         router.refresh();
       } else {
         throw new Error(data.message || 'Failed to create service type');

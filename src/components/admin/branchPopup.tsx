@@ -152,7 +152,7 @@ export default function BranchPopup({onClose , branch} : PropsData) {
                         
                         setToast({ isOpen: true, message: "Write Success", type: "success" });
                     
-                        onClose(true)
+                        onClose(false)
                         router.refresh()
         
                         

@@ -1,6 +1,7 @@
 import BranchList from "@/components/branch/branchList";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic'
 export default async function Branches() {
     const branches = await db.branch.findMany();
 
