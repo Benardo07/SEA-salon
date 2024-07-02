@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Star from "./star";
 import ReviewBar from "./reviewBar";
