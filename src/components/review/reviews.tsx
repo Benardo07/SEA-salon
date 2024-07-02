@@ -40,12 +40,26 @@ export default function Reviews({ reviews }: ReviewProps) {
     }
 
     useEffect(() => {
-        setReviews(reviews)
+        const fetchReviews = async () => {
+          try {
+            // Adjust this to your actual API endpoint or local fetching logic
+            const response = await fetch('/api/review');
+            const data = await response.json();
+            setReviews(data.allreviews);
+          } catch (error) {
+            console.error('Failed to fetch reviews:', error);
+          }
+        };
+    
+        fetchReviews();
+      }, []);
+
+    useEffect(() => {
         setTotalReviews(reviews.length);
         setAverageRating(reviews.length > 0 
             ? reviews.reduce((acc, curr) => acc + curr.starRating, 0) / reviews.length
             : 0);
-    }, [reviews]);  // Re-run this effect if reviews change
+    }, [allReviews]);  // Re-run this effect if reviews change
 
     // Function to calculate the percentage of each star rating for the bar display
     const calculatePercentage = (star: number) => {

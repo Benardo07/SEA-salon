@@ -47,6 +47,44 @@ export async function POST(req : Request) {
     }
 }
 
+export async function GET(req : Request) {
+  try{
+      
+
+      
+
+    const fetchedReviews = await db.review.findMany(
+      {
+          select : {
+              id: true,
+              createdAt: true,
+              starRating: true,
+              comment: true,
+              user : {select : {
+                  fullName: true,
+                  email: true,
+              }}
+          }
+      }
+    )
+      return NextResponse.json(
+          {
+            allreviews: fetchedReviews,
+          },
+          { status: 201 }
+        );
+
+
+  }catch(error){
+      return NextResponse.json(
+          {
+            message: "Internal Server Error"
+          },
+          { status: 500 }
+        );
+  }
+}
+
 export async function DELETE(req: Request) {
     try {
         const session = await getServerSession(authOptions);
