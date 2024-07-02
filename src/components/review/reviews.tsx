@@ -96,16 +96,18 @@ export default function Reviews({ reviews }: ReviewProps) {
                     {totalReviews > 0 ? (
                         <div className="flex flex-col gap-6 px-4 py-10">
                             {allReviews.map((review, index) => (
-                                <div key={review.user.email} className="flex flex-col p-4 border-b-2 border-black">
-                                    <p className="text-lg font-bold text-black">{review.user.fullName}</p>
-                                    <p className="text-base text-[#0e141b]">{formattedDate(review.createdAt)}</p>
-                                    <div className="flex gap-0.5 mt-2 mb-2">
-                                    {Array.from({ length: 5 }, (_, index) => (
-                                        <Star key={index} filled={index < review.starRating} />
-                                    ))}
+                                <RevealDesc key={review.user.email} custom={index*0.5}>
+                                    <div  className="flex flex-col p-4 border-b-2 border-black">
+                                        <p className="text-lg font-bold text-black">{review.user.fullName}</p>
+                                        <p className="text-base text-[#0e141b]">{formattedDate(review.createdAt)}</p>
+                                        <div className="flex gap-0.5 mt-2 mb-2">
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <Star key={index} filled={index < review.starRating} />
+                                        ))}
+                                        </div>
+                                        <p className="text-base text-wrap text-[#0e141b]">{review.comment}</p>
                                     </div>
-                                    <p className="text-base text-wrap text-[#0e141b]">{review.comment}</p>
-                                </div>
+                                </RevealDesc>
                             ))}
                         </div>
                     ) : (

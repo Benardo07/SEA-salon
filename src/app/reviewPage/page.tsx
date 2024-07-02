@@ -7,16 +7,19 @@ export const dynamic = 'force-dynamic'
 export default async function ReviewList(){
       const fetchedReviews = await db.review.findMany(
         {
-            select : {
-                id: true,
-                createdAt: true,
-                starRating: true,
-                comment: true,
-                user : {select : {
-                    fullName: true,
-                    email: true,
-                }}
-            }
+          orderBy: {
+            starRating: "desc",
+          },
+          select : {
+              id: true,
+              createdAt: true,
+              starRating: true,
+              comment: true,
+              user : {select : {
+                  fullName: true,
+                  email: true,
+              }}
+          }
         }
       )
     return (
