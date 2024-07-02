@@ -4,9 +4,6 @@ import { db } from "@/lib/db";
 
 export default async function Review(){
     const reviews = await db.review.findMany({
-        orderBy: {
-          starRating: 'desc' // Sorts the reviews by starRating in descending order
-        },
         select: {
           createdAt: true,
           starRating: true,

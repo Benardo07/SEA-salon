@@ -38,6 +38,7 @@ export default function Reviews({ reviews }: ReviewProps) {
     }
 
     useEffect(() => {
+        setReviews(reviews)
         setTotalReviews(reviews.length);
         setAverageRating(reviews.length > 0 
             ? reviews.reduce((acc, curr) => acc + curr.starRating, 0) / reviews.length
@@ -78,7 +79,7 @@ export default function Reviews({ reviews }: ReviewProps) {
 
                     {totalReviews > 0 ? (
                         <div className="flex flex-col gap-6 px-4 py-10">
-                            {reviews.map((review, index) => (
+                            {allReviews.map((review, index) => (
                                 <RevealDesc custom={index*0.5} key={review.user.email}>
                                     <div className="flex flex-col p-4 border-b-2 border-black">
                                         <p className="text-lg font-bold text-black">{review.user.fullName}</p>
