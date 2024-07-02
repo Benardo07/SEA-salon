@@ -367,8 +367,8 @@ const ReservationForm: React.FC<formProps> = ({branches, serviceTypes}) => {
           {selectedStylist ? (
             <div className="flex flex-wrap items-center justify-center gap-10 p-4 ">
               <Calendar selectedDate={selectedDate} onDateClick={handleDateClick} />
-              {selectedDate && (
-                <TimeSelector selectedDate={selectedDate} selectedTime={selectedTime} bookedTime={bookedTime} onTimeClick={setSelectedTime} />
+              {selectedDate && selectedBranch && (
+                <TimeSelector branch={selectedBranch} selectedDate={selectedDate} selectedTime={selectedTime} bookedTime={bookedTime} onTimeClick={setSelectedTime} />
               )}
             </div>
           ) : (
