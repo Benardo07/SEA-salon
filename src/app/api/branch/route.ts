@@ -182,11 +182,44 @@ export async function DELETE(req : Request) {
           where: { id: branchId as string },
         });
 
-      
+        const fetchedBranches = await db.branch.findMany({
+          select: {
+            id: true,  // Branch ID
+            name: true,  // Branch Name
+            locationURL: true,
+            openingTime: true,
+            closingTime: true,
+            branchTelp: true,  // Branch Telephone Number
+            address: true,
+            services: {
+              select: {
+                id: true,
+                serviceName: true,
+                duration: true,
+                branchId: true,
+                description: true,
+                typeId: true,
+                imgUrl: true,
+                price: true,
+              }
+            },
+            stylists: {
+              select: {
+                id: true,
+                name: true,
+                branchId: true,
+                imgUrl: true,
+                gender: true,
+                
+              }
+            }
+          }
+        });
 
       return NextResponse.json(
           {
             message: "Succesfull Delete branch",
+            newBranches: fetchedBranches
           },
           { status: 201 }
       );

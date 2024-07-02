@@ -124,7 +124,7 @@ export default function BranchPopup({onClose , branch , updateBranches} : PropsD
                     if (response.ok) {
                         
                         setToast({ isOpen: true, message: "Update Success", type: "success" });
-                        updateBranches(data.newbranches)
+                        updateBranches(data.newBranches)
                         onClose(false);
                         
                         router.refresh();
@@ -155,7 +155,7 @@ export default function BranchPopup({onClose , branch , updateBranches} : PropsD
                     if (response.ok) {
                         
                         setToast({ isOpen: true, message: "Write Success", type: "success" });
-                        updateBranches(data.newbranches)
+                        updateBranches(data.newBranches)
                         onClose(false)
                         router.refresh()
                         
