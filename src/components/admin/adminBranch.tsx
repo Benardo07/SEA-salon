@@ -78,6 +78,7 @@ export default function AdminBranch({ branches, serviceTypes, updateBranch }: Da
                 console.log('Branch Deleted:', data);
                 
                 setToast({ isOpen: true, message: "Delete Success", type: "success" });
+                router.push('/adminDashboard')
                 router.refresh()
 
             } else {
